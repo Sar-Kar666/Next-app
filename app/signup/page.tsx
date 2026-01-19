@@ -2,10 +2,12 @@
 
 import axios from "axios";
 import { useState } from "react"
+import { useRouter } from "next/navigation";
 
 export default function Signup(){
     const [user,setUser]=useState("");
     const [password,setPassword]=useState("");
+    const router = useRouter();
 
     return<div className="h-screen w-full flex justify-center items-center">
             <div className="border bg-gray-700 h-100 w-100 flex justify-center items-center">
@@ -34,10 +36,13 @@ export default function Signup(){
                         <button 
                             className="border-amber-300 border p-1 h-10 rounded-xl w-full cursor-pointer"
                             onClick={()=>{
-                                axios.post("https://localhost:3000/api/v1/signup",{
+                                axios.post("http://localhost:3000/api/v1/signup",{
                                     user,
                                     password
                                 })
+                                    .then(()=>{
+                                        router.push("/signin");
+                                    })
                             }}>
                                 Sign in
                         </button>
